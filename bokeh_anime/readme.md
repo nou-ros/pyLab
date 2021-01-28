@@ -12,7 +12,7 @@
 To show the tabular data with bokeh visualization library in the browser. 
 
 ## Screenshots
-![Example screenshot](./bokeh_anime/bokeh.png)
+![Example screenshot](./bokeh.png)
 
 ## Technologies
 * python
