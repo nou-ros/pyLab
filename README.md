@@ -1,4 +1,4 @@
-# PyLab ⚠️ Under Construction 🚧
+# PyLab 
 All the simple python recipes cooked by the owner will be available here.
 
 ## Installation
