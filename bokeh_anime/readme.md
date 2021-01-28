@@ -1,9 +1,23 @@
+
 # Bokeh Anime
-Bokeh Anime is a demo project to test python bokeh library.
+> Bokeh Anime is a demo project to test python bokeh library.
 
-## Installation
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install bokeh. 
-```bash
-pip install bokeh
-```
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Setup](#setup)
 
+
+## General info
+To show the tabular data with bokeh visualization library in the browser. 
+
+## Screenshots
+![Example screenshot](./img/screenshot.png)
+
+## Technologies
+* python
+* Numpy
+* Bokeh
+
+## Contact
+Created by [@nourosO_O](https://twitter.com/nourosO_O) - feel free to contact me!
