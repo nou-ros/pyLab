@@ -11,7 +11,6 @@
 To show the tabular data with bokeh visualization library in the browser. 
 
 ## Technologies
-* python
 * Numpy
 * Bokeh
 
