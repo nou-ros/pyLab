@@ -7,4 +7,4 @@ Install [python](https://www.python.org/downloads/) to play around with the comp
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
 
-⚠️ Under Construction 🚧
+⚠️ Under Development 🚧
