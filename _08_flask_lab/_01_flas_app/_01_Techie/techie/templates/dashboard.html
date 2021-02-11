@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>Ahoy, <strong class="text-info">{{session.username}}</strong></h1>
+    <a href="/add_story" class="btn btn-success">Add Story</a>
+    <hr>
+    <table class="table table-striped">
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Date</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for story in stories  %}
+            <tr>
+                <td>{{story.id}}</td>
+                <td>{{story.title}}</td>
+                <td>{{story.author}}</td>
+                <td>{{story.create_date}}</td>
+                <td><a href="/edit_story/{{story.id}}" class="btn btn-warning float-right">Edit</a></td>
+                <td>
+                    <form action="{{url_for('delete_story', id=story.id)}}" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

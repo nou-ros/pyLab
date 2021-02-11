@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h1>Stories</h1>
+<ul class="list-group">
+{% for story in stories %}
+    <list class="list-group-item"><a href="story/{{story.id}}" class="badge badge-pill badge-dark">{{story.title}}</a></list>
+{% endfor %}
+</ul>
+{% endblock  %}

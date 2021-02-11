@@ -1,0 +1,13 @@
+
+<div class="cover-container mx-auto">
+  <a class="navbar-brand mx-3 text-info" href="/">TechiE</a>
+        <nav class="nav nav-masthead justify-content-center">
+          <a class="btn btn-sm btn-dark mx-2 my-2 nav-link" href="/">Home</a>
+          <a class="btn btn-sm btn-dark mx-2 my-2 nav-link" href="/about">About</a>
+          <a class="btn btn-sm btn-dark mx-2 my-2 nav-link" href="/stories">Stories</a>
+          {% if session.logged_in %}
+          <a class="btn btn-sm btn-dark mx-2 my-2 nav-link" href="/logout">logout</a>
+          <a class="btn btn-sm btn-dark mx-2 my-2 nav-link" href="/dashboard">Dashboard</a>
+          {% endif %}
+        </nav>
+</div>
