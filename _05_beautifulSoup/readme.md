@@ -1,12 +1,12 @@
 # BeautifulSoup 
-> A demo project to test python BeautifulSoup library.
+> A demo project to test python BeautifulSoup library. 
 
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
 
 ## General info
-To scrap web data beautifulSoup is used.  
+Monitor the price of wacom touchpad from amazon. 
 
 ## Technologies
 * BeautifulSoup
