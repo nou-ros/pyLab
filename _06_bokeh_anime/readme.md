@@ -1,5 +1,5 @@
 
-# Bokeh Anime
+# Bokeh Library
 > Bokeh Anime is a demo project to test python bokeh library.
 
 ## Table of contents
