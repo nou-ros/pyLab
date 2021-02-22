@@ -6,11 +6,12 @@
 * [Technologies](#technologies)
 
 ## General info
-Monitor the price of wacom touchpad from amazon. 
+Monitor the price of wacom touchpad using beautifulSoup library from amazon and email it via smtp library. 
 
 ## Technologies
 * BeautifulSoup
 * Request
+* smtplib
 
 ## Contact
 Created by [@nourosO_O](https://twitter.com/nourosO_O) - feel free to contact me!
