@@ -1,0 +1,5 @@
+zip : ZIP files
+tar : Uncompressed tar files
+gztar: gzip'ed tar-file
+bztar: bzip2'ed tar-file
+xztar: xz'ed tar-file
