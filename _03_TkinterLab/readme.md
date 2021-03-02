@@ -24,3 +24,8 @@ Simple weather application using openweathermap api.
 ## Technologies
 * tkinter
 * requests
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
+
+⚠️ Under Development 🚧
