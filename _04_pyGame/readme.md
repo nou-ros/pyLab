@@ -1,1 +1,1 @@
-A space game with python pyGame library.
+Space game with python pyGame library.

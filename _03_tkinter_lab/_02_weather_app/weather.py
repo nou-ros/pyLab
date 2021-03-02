@@ -10,7 +10,7 @@ Width=600
 def btn_function(entry):
     print("this is the entry: ", entry)
 
-#676b60e0b542d88c3edc7759697faf20
+#676b60e0b542d88c3edc7759697faf20 key
 #api.openweathermap.org/data/2.5/forecast?q={city name},{country code}
 
 
@@ -29,7 +29,7 @@ def format_response(weather):
     return final_str
 
 def get_weather(city):
-    weather_key = '676b60e0b542d88c3edc7759697faf20'
+    weather_key = ''
     url = 'https://api.openweathermap.org/data/2.5/weather'
     params = {'APPID' : weather_key, 'q': city, 'units' : 'metric'}
     response= requests.get(url, params=params)

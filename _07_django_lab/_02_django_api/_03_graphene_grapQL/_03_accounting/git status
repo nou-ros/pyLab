@@ -1,0 +1,117 @@
+[1mdiff --git a/api/__pycache__/schema.cpython-38.pyc b/api/__pycache__/schema.cpython-38.pyc[m
+[1mindex 7b6858b..6eb542c 100644[m
+Binary files a/api/__pycache__/schema.cpython-38.pyc and b/api/__pycache__/schema.cpython-38.pyc differ
+[1mdiff --git a/api/schema.py b/api/schema.py[m
+[1mindex 3de1d57..acc69e5 100644[m
+[1m--- a/api/schema.py[m
+[1m+++ b/api/schema.py[m
+[36m@@ -164,7 +164,9 @@[m [mclass Update_Supplier_Additional_Contacts(graphene.Mutation):[m
+     def mutate(self, info, id, input=None):[m
+         supplier_additional_contacts_instance = Supplier_Additional_Contacts.objects.get(pk=id)[m
+         supplier = input.get("supplier_id")[m
+[32m+[m[32m        # print(supplier)[m
+         supplier_id = Supplier.objects.get(pk=supplier.id)[m
+[32m+[m[32m        # print(supplier_id)[m
+ [m
+         if supplier_additional_contacts_instance:[m
+ [m
+[36m@@ -196,7 +198,7 @@[m [mclass Update_Supplier_Additional_Contacts(graphene.Mutation):[m
+                 supplier_additional_contacts_instance.email_address = input.email_address[m
+             [m
+             if supplier_additional_contacts_instance.supplier_id is not None:[m
+[31m-                supplier_additional_contacts_instance.supplier_id = input.supplier_id[m
+[32m+[m[32m                supplier_additional_contacts_instance.supplier_id = supplier_id[m
+ [m
+             supplier_additional_contacts_instance.save()[m
+ [m
+[36m@@ -239,8 +241,19 @@[m [mquery allSuppliers{[m
+     logo[m
+     corporationNo[m
+     supplierAdditionalContactsSet{[m
+[32m+[m[32m      id[m
+[32m+[m[32m      isActive[m
+       firstName[m
+       mobilePhone[m
+[32m+[m[32m      lastName[m
+[32m+[m[32m      middleName[m
+[32m+[m[32m      workPhone[m
+[32m+[m[32m      emailAddress[m
+[32m+[m[32m      salutation[m
+[32m+[m[32m      supplierId{[m
+[32m+[m[32m        id[m
+[32m+[m[32m        companyName[m
+[32m+[m[32m      }[m
+     }[m
+   }[m
+ }[m
+[36m@@ -287,42 +300,45 @@[m [mquery allSuppliersAddContacs{[m
+ [m
+ mutation supplierCreation{[m
+   createSupplier(input: {[m
+[31m-    companyName: "Argo Firm",[m
+[32m+[m[32m    companyName: "Argo Chemicalz Firm",[m
+     firstName: "Argo",[m
+     isActive: true,[m
+[32m+[m[32m    middleName: "Chemicals"[m
+     lastName: "Firm",[m
+[31m-    website: "",[m
+[31m-    corporationNo: ""[m
+[31m-    displayName: "Bla"[m
+[32m+[m[32m    displayName: "ACF",[m
+[32m+[m[32m    website: "www.acf.com",[m
+[32m+[m[32m    salutation: "fca",[m
+[32m+[m[32m    emailAddress: "acf@acf.com.bd"[m
+   })[m
+   {[m
+     supplier{[m
+       id[m
+[31m-      companyName[m
+     }[m
+   }[m
+ }[m
+ [m
+ mutation supplierUpdate{[m
+[31m-  updateSupplier(id:24, input: {[m
+[31m-  companyName: "Blah Chemicalz",[m
+[32m+[m[32m  updateSupplier(id:5, input: {[m
+[32m+[m[32m  companyName: "Argo Chemicals Firm",[m
+   isActive: true,[m
+[31m-  firstName: "Blah",[m
+[31m-  lastName: "Chemicalz",[m
+[31m-	website: "www.bla.com"[m
+[32m+[m[32m  firstName: "Argo",[m
+[32m+[m[32m  middleName: "Chemicals",[m
+[32m+[m[32m  lastName: "Firm",[m
+[32m+[m	[32mwebsite: "www.argo.com",[m
+[32m+[m[32m  emailAddress: "argo@argo.com.bd"[m
+   })[m
+   {[m
+     supplier{[m
+       id[m
+       companyName[m
+       website[m
+[31m-      displayName[m
+[32m+[m[32m      emailAddress[m
+     }[m
+   }[m
+ }[m
+ [m
+ mutation supplierDelete{[m
+[31m-  deleteSupplier(id: 24){[m
+[32m+[m[32m  deleteSupplier(id: 4){[m
+     supplier{[m
+       id[m
+     }[m
+[36m@@ -332,11 +348,16 @@[m [mmutation supplierDelete{[m
+ mutation additionalSupplierContactCreation{[m
+   createSupplierAdditionalContacts(input:{[m
+     isActive: true,[m
+[31m-    firstName: "MonoTech",[m
+[32m+[m[32m    firstName: "Tech",[m
+[32m+[m[32m    middleName: "Chemicals"[m
+     lastName: "Production"[m
+[32m+[m[32m    designation: "hello",[m
+[32m+[m[32m    workPhone: "1111",[m
+[32m+[m[32m    emailAddress: "tech@tech.com.bd",[m
+[32m+[m[32m    salutation: "91k",[m
+ 
