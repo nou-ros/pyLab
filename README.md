@@ -26,7 +26,7 @@ Python scripts construction area.
 -- Automation approaches based on python scripts. 
 
 ## Installation
-Install [python](https://www.python.org/downloads/) to run any of the application.
+Install [python](https://www.python.org/downloads/) to run any of the following project.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
