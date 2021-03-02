@@ -1,6 +1,6 @@
 # Object Oriented Programming
 
-Python object oriented programming concepts has been intorduced here. 
+Introduction to python OOP concepts.
 
 ## Table of contents
 * Class Instance 
