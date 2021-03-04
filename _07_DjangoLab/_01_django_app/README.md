@@ -5,6 +5,7 @@ A homelab for django applications
 * CRUD
 * TODO
 * [Animifo](https://animifo.herokuapp.com/)
+* [TreesFarm](https://treesfarm.herokuapp.com/)
 * [Stripe Coffee APP](https://cofe-code.herokuapp.com/)
 
 ## Installation
