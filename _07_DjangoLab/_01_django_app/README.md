@@ -4,8 +4,8 @@ A homelab for django applications
 ## 
 * CRUD
 * TODO
-* [Animifo](https://animifo.herokuapp.com/)
-* [TreesFarm](https://treesfarm.herokuapp.com/) (Media files have been removed)
+* [Animifo](https://animifo.herokuapp.com/)[Under construction blogsite.]
+* [TreesFarm](https://treesfarm.herokuapp.com/) [Media files have been removed]
 * [Stripe Coffee APP](https://cofe-code.herokuapp.com/) [Test with demo card details: 4242 4242 4242 4242, 12/26, 123, 12345]
 
 ## Installation
