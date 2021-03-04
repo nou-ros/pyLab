@@ -1,0 +1,98 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %} | About Us {% endblock %}
+{% block content %}
+
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">About TreesFarm</h1>
+          <p class="lead">We have gardening packages for your home. Our proposals focus both on indoor and outdoor planting. Now you can easily take the first initiative with us for a greener world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active"> About</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section id="about" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <h2>Build The Perfect Home Garden With Us</h2>
+          <p class="lead">We start our journey to build a greener world in 2019. With only three handpicked farmers we worked hard to make it possible. Now we are a team of 50 members who are working tremendously for a greener future.</p>
+          <img src="{% static 'img/about.jpg' %}" alt="">
+          <p class="mt-4">Our every package offers various species of trees. Along with the required amount of fertilizers and soil for the initial state. We also provide a detailed catalog for all of our proposals so you can choose what satisfy your interest more. Alongside all our farmers are handpicked and trained thoroughly. All our efforts are towards making your home closer to nature.</p>
+        </div>
+
+        <div class="col-md-4">
+          {% if top_farmer %}
+            {% for farmer in top_farmer %}
+              <div class="card">
+                <img class="card-img-top" src="{{ farmer.photo.url }}" alt="Seller of the month">
+                <div class="card-body">
+                  <h5 class="card-title">Farmer Of The Month</h5>
+                  <h6 class="text-secondary">{{ farmer.name }}</h6>
+                  <p class="card-text">{{ farmer.description }}
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="bg-dark text-white text-center">
+    <h2 class="display-4">We Work To Build The Nature</h2>
+    <h4>Join us to plant more trees daily. It is our vision to plant 100 thousand trees each year. Which will absorb approximately 24,000 tons of carbon dioxide each year.</h4>
+    <hr>
+    <a href="listings.html" class="btn btn-secondary text-white btn-lg">View Our Featured Listings</a>
+  </section>
+
+  <!-- Team -->
+  <section id="team" class="py-5">
+    <div class="container">
+      <h2 class="text-center">Our Team</h2>
+      <div class="row text-center">
+        {% if farmers %}
+          {% for farmer in farmers %}
+            <div class="col-md-4">
+              <img src="{{ farmer.photo.url }}" alt="" class="rounded-circle mb-3">
+              <h4>{{ farmer.name }}</h4>
+              <p class="text-success">
+                <i class="fas fa-award text-success mb-3"></i>Farmer</p>
+              <hr>
+              <p>
+                <i class="fas fa-phone"></i>{{farmer.phone}}</p>
+              <p>
+                <i class="fas fa-envelope-open"></i>{{farmer.email}}</p>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>No Farmers Available.</p>
+          </div>
+        {% endif %}
+      
+      </div>
+    </div>
+  </section>
+{% endblock %}
