@@ -5,7 +5,8 @@ A Python program terminates as soon as it encounters an error. In Python, an err
 Syntax Errors
 A Syntax Error occurs when the parser detects a syntactically incorrect statement. A syntax error can be for example a typo, missing brackets, no new line (see code below), or wrong identation (this will actually raise its own IndentationError, but its subclassed from a SyntaxError).'''
 
-a = 5 print(a)
+a = 5 
+print(a)
 
 '''Exceptions
 Even if a statement is syntactically correct, it may cause an error when it is executed. This is called an Exception Error. There are several different error classes, for example trying to add a number and a string will raise a TypeError.'''

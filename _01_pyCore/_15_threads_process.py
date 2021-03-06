@@ -35,7 +35,32 @@ Use the threading module.
 
 Note: The following example usually won't benefit from multiple threads since it is CPU-bound. It should just show the example of how to use threads.'''
 
+'''
+import threading
+import time 
+start = time.perf_counter()
+
+# starting single threads - 1
+
+def do_something():
+    print('Sleeping 1 second....')
+    time.sleep(1)
+    print('Done sleeping')
+
+
+t1 = threading.Thread(target=do_something)
+t2 = threading.Thread(target=do_something)
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+
+'''
+
 from threading import Thread
+
 
 def square_numbers():
     for i in range(1000):
@@ -60,14 +85,17 @@ if __name__ == "__main__":
     for thread in threads:
         thread.join()
 
-'''When is Threading useful
+'''
+When is Threading useful:
+
 Despite the GIL it is useful for I/O-bound tasks when your program has to talk to slow devices, like a hard drive or a network connection. With threading the program can use the time waiting for these devices and intelligently do other tasks in the meantime.
 
-Example: Download website information from multiple sites. Use a thread for each site.'''
-
+Example: Download website information from multiple sites. Use a thread for each site.
+'''
 '''
 Multiprocessing
-Use the multiprocessing module. The syntax is very similar to above.'''
+Use the multiprocessing module. The syntax is very similar to above.
+'''
 from multiprocessing import Process
 import os
 

@@ -28,9 +28,9 @@ print(list(perm))
 perm = permutations([1, 2, 3], 2)
 print(list(perm))
 
-''''
+'''
 combinations() and combinations_with_replacement()
-r-length tuples, in sorted order. So, if the input iterable is sorted, the combination tuples will be produced in sorted order. combinations() does not allow repeated elements, but combinations_with_replacement() does.''''
+r-length tuples, in sorted order. So, if the input iterable is sorted, the combination tuples will be produced in sorted order. combinations() does not allow repeated elements, but combinations_with_replacement() does.'''
 
 from itertools import combinations, combinations_with_replacement
 

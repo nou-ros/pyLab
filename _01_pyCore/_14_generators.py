@@ -1,4 +1,5 @@
-'''Generators
+'''
+Generators
 Generators are functions that can be paused and resumed on the fly, returning an object that can be iterated over. Unlike lists, they are lazy and thus produce items one at a time and only when asked. So they are much more memory efficient when dealing with large datasets.
 A generator is defined like a normal function but with the yield statement instead of return.
 
@@ -8,7 +9,8 @@ def my_generator():
     yield 3
 
 Execution of a generator function
-Calling the function does not execute it. Instead, the function returns a generator object which is used to control execution. Generator objects execute when next() is called. When calling next() the first time, execution begins at the start of the function and continues until the first yield statement where the value to the right of the statement is returned. Subsequent calls to next() continue from the yield statement (and loop around) until another yield is reached. If yield is not called because of a condition or the end is reached, a StopIteration exception is raised:'''
+Calling the function does not execute it. Instead, the function returns a generator object which is used to control execution. Generator objects execute when next() is called. When calling next() the first time, execution begins at the start of the function and continues until the first yield statement where the value to the right of the statement is returned. Subsequent calls to next() continue from the yield statement (and loop around) until another yield is reached. If yield is not called because of a condition or the end is reached, a StopIteration exception is raised:
+'''
 
 def countdown(num):
     print('Starting')
