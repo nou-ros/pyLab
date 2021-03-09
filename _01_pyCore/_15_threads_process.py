@@ -17,7 +17,8 @@ Starting a process is slower that starting a thread
 Larger memory footprint
 IPC (inter-process communication) is more complicated
 Threads
-A thread is an entity within a process that can be scheduled for execution (Also known as "leightweight process"). A Process can spawn multiple threads. The main difference is that all threads within a process share the same memory.
+A thread is an entity within a process that can be scheduled for execution (Also known as "leightweight process"). A Process can spawn multiple threads. The main difference 
+is that all threads within a process share the same memory.
 
 Key facts:
 
@@ -88,7 +89,8 @@ if __name__ == "__main__":
 '''
 When is Threading useful:
 
-Despite the GIL it is useful for I/O-bound tasks when your program has to talk to slow devices, like a hard drive or a network connection. With threading the program can use the time waiting for these devices and intelligently do other tasks in the meantime.
+Despite the GIL it is useful for I/O-bound tasks when your program has to talk to slow devices, like a hard drive or a network connection. With threading the program can use
+the time waiting for these devices and intelligently do other tasks in the meantime.
 
 Example: Download website information from multiple sites. Use a thread for each site.
 '''
@@ -125,7 +127,8 @@ if __name__ == "__main__":
 
 
 '''When is Multiprocessing useful
-It is useful for CPU-bound tasks that have to do a lot of CPU operations for a large amount of data and require a lot of computation time. With multiprocessing you can split the data into equal parts an do parallel computing on different CPUs.
+It is useful for CPU-bound tasks that have to do a lot of CPU operations for a large amount of data and require a lot of computation time. With multiprocessing you can split 
+the data into equal parts an do parallel computing on different CPUs.
 
 Example: Calculate the square numbers for all numbers from 1 to 1000000. Divide the numbers into equal sized parts and use a process for each subset.
 
