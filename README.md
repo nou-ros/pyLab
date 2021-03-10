@@ -21,6 +21,20 @@ Python scripts construction area.
 * Automation/Testing
 -- Automation & testing(UnitTest, Pytest) approaches based on python scripts. 
 
+| Tables   |      Are      |  Cool | Python module |
+|----------|:-------------:|------:|:-------------:|
+| HTTP     |  left-aligned | $1600 |               |
+| NNTP |    centered   |   $12 |               |
+| col 3 is | right-aligned |    $1 |               |
+| col 3 is | right-aligned |    $1 |               |
+| col 3 is | right-aligned |    $1 |               |
+| col 3 is | right-aligned |    $1 |               |
+| col 3 is | right-aligned |    $1 |               |
+| col 3 is | right-aligned |    $1 |               |
+| col 3 is | right-aligned |    $1 |               |
+| col 3 is | right-aligned |    $1 |               |
+| col 3 is | right-aligned |    $1 |               |
+
 ## Installation
 Install [python](https://www.python.org/downloads/) to run any of the following project.
 
