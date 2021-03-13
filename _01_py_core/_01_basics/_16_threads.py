@@ -28,6 +28,26 @@ Start a thread with thread.start()
 
 Call thread.join() to tell the program that it should wait for this thread to complete before it continues with the rest of the code.'''
 
+'''
+# work with single thread.
+
+import threading
+import time 
+start = time.perf_counter()
+# starting single threads - 1
+def do_something():
+    print('Sleeping 1 second....')
+    time.sleep(1)
+    print('Done sleeping')
+t1 = threading.Thread(target=do_something)
+t2 = threading.Thread(target=do_something)
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+'''
+
+# Note: The following example usually won't benefit from multiple threads since it is CPU-bound. It should just show the example of how to use threads.
 from threading import Thread
 
 def square_numbers():
@@ -58,7 +78,13 @@ Since threads live in the same memory space, they have access to the same (publi
 and write access.
 
 Task: Create two threads, each thread should access the current database value, modify it (in this case only increase it by 1), and write the new value back into the database 
-value. Each thread should do this operation 10 times.'''
+value. Each thread should do this operation 10 times.
+
+When is Threading useful:
+Despite the GIL it is useful for I/O-bound tasks when your program has to talk to slow devices, like a hard drive or a network connection. With threading the program can use
+the time waiting for these devices and intelligently do other tasks in the meantime.
+Example: Download website information from multiple sites. Use a thread for each site.
+'''
 
 from threading import Thread
 import time
