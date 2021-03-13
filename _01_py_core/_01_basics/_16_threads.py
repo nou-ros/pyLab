@@ -1,4 +1,4 @@
-'''Threading in Python
+'''
 Threads: An entity within a process that can be scheduled aka lightweight process. A process can spawn multiple threads. 
 
 + All threads within a process share the same memory.
@@ -10,6 +10,26 @@ Threads: An entity within a process that can be scheduled aka lightweight proces
 - No effect for CPU-bound tasks
 - Not interruptable/killable
 - Careful with race conditions. (Race condition: when two or more threads wants to access the same resource)
+
+GIL - Global interpreter lock
+This is a mutex (or a lock) that allows only one thread to hold control of the Python interpreter. This means that the GIL allows only one thread to execute at a time even in 
+a multi-threaded architecture.
+
+Why is it needed?
+It is needed because CPython's (reference implementation of Python) memory management is not thread-safe. Python uses reference counting for memory management. It means that 
+bjects created in Python have a reference count variable that keeps track of the number of references that point to the object. When this count reaches zero, the memory
+occupied by the object is released. The problem was that this reference count variable needed protection from race conditions where two threads increase or decrease its 
+value simultaneously. If this happens, it can cause either leaked memory that is never released or incorrectly release the memory while a reference to that object still exists.
+
+How to avoid the GIL
+The GIL is very controversial in the Python community. The main way to avoid the GIL is by using multiprocessing instead of threading. Another (however uncomfortable) solution
+would be to avoid the CPython implementation and use a free-threaded Python implementation like Jython or IronPython. A third option is to move parts of the application out 
+into binary extensions modules, i.e. use Python as a wrapper for third party libraries (e.g. in C/C++). This is the path taken by numypy and scipy.
+
+When is Threading useful:
+Despite the GIL it is useful for I/O-bound tasks when your program has to talk to slow devices, like a hard drive or a network connection. With threading the program can use
+the time waiting for these devices and intelligently do other tasks in the meantime.
+Example: Download website information from multiple sites. Use a thread for each site.
 
 Working: 
 - How to create and start multiple threads
@@ -29,7 +49,7 @@ Start a thread with thread.start()
 Call thread.join() to tell the program that it should wait for this thread to complete before it continues with the rest of the code.'''
 
 '''
-# work with single thread.
+# work with 2 threads.
 
 import threading
 import time 
@@ -72,18 +92,61 @@ if __name__ == "__main__":
     # block the main thread until these threads are finished
     for thread in threads:
         thread.join()
+        
+'''       
+# new way of doing multithreading
+
+import concurrent.futures
+import time
+
+start = time.perf_counter()
+
+
+def do_something(seconds):
+    print(f'Sleeping {seconds} second(s)...')
+    time.sleep(seconds)
+    # print(f'Done sleeping {seconds}') with concurrent approach
+    return f'Done Sleeping...{seconds}'
+
+
+with concurrent.futures.ThreadPoolExecutor() as executor:
+    
+    # f1 = executor.submit(do_something, 1)
+    # f2 = executor.submit(do_something, 1)
+    # print(f1.result())
+    # print(f2.result())
+    
+    # results = [executor.submit(do_something, 1) for _ in range(10)]
+
+    secs = [5, 4, 3, 2, 1]
+    results = executor.map(do_something, secs)
+    
+    # for result in results:
+    #     print(result)
+    
+
+
+# threads = []
+
+# for _ in range(10):
+#     t = threading.Thread(target=do_something, args=[1.5])
+#     t.start()
+#     threads.append(t)
+
+# for thread in threads:
+#     thread.join()
+
+finish = time.perf_counter()
+
+print(f'Finished in {round(finish-start, 2)} seconds')
+'''
 
 '''Share data between threads
-Since threads live in the same memory space, they have access to the same (public) data. Thus, you can for example simply use a global variable to which all threads have read 
-and write access.
+Since threads live in the same memory space, they have access to the same (public) data. Thus, you can for example simply use a global variable to which all threads have 
+read and write access.
 
 Task: Create two threads, each thread should access the current database value, modify it (in this case only increase it by 1), and write the new value back into the database 
 value. Each thread should do this operation 10 times.
-
-When is Threading useful:
-Despite the GIL it is useful for I/O-bound tasks when your program has to talk to slow devices, like a hard drive or a network connection. With threading the program can use
-the time waiting for these devices and intelligently do other tasks in the meantime.
-Example: Download website information from multiple sites. Use a thread for each site.
 '''
 
 from threading import Thread
@@ -136,8 +199,8 @@ consuming operations, the programm will swap to the second thread in the meantim
 to 1. Now both threads have a local copy with value 1, so both will write the 1 into the global database_value. This is why the end value is 1 and not 2.
 
 Avoid race conditions with Locks
-A lock (also known as mutex) is a synchronization mechanism for enforcing limits on access to a resource in an environment where there are many threads of execution. A Lock has 
-two states: locked and unlocked. If the state is locked, it does not allow other concurrent threads to enter this code section until the state is unlocked again.
+A lock (also known as mutex) is a synchronization mechanism for enforcing limits on access to a resource in an environment where there are many threads of execution. A Lock 
+has two states: locked and unlocked. If the state is locked, it does not allow other concurrent threads to enter this code section until the state is unlocked again.
 
 Two functions are important:
 
@@ -247,7 +310,7 @@ q.empty() : Return True if the queue is empty.
 The following example uses a queue to exchange numbers from 0...19. Each thread invokes the worker method. Inside the infinite loop the thread is waiting until items are 
 available due to the blocking q.get() call. When items are available, they are processed (i.e. just printed here), and then q.task_done() tells the queue that processing is 
 complete. In the main thread, 10 daemon threads are created. This means that they automatically die when the main thread dies, and thus the worker method and infinite loop is
-no longer invoked. Then the queue is filled with items and the worker method can continue with available items. At the end q.join() is necessary to block the main thread until 
+no longer invoked. Then the queue is filled with items and the worker method can continue with available items. At the end q.join() is necessary to block the main thread until
 all items have been gotten and proccessed.'''
 
 
