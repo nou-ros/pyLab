@@ -1,13 +1,37 @@
 '''
+Process: An instance of a program. 
+
++ Takes advantage of multiple CPUs and cores
++ Separate memory space -> Memory is not shared between process
++ Great for CPU-bound works.
++ New process is stated independently from other process.
++ Process are interruptable/killable.
++ One GIL for each process -> avoids GIL limitation
+
+Disadvantages:
+- Heavyweight
+- Starting a process is slower than starting a thread.
+- Requires more memory
+- Inter process communication is complicated.
+
+
 Multiprocessing in Python
 In this article we talk about how to use the multiprocessing module in Python.
 
-How to create and start multiple processes
-How to wait for processes to complete
-How to share data between processes
-How to use Locks to prevent race conditions
-How to use a Queue for process-safe data/task processing.
-How to use a Pool to manage multiple worker processes
+Working: 
+- How to create and start multiple processes
+- How to wait for processes to complete
+- How to share data between processes
+- How to use Locks to prevent race conditions
+- How to use a Queue for process-safe data/task processing.
+- How to use a Pool to manage multiple worker processes
+
+When is Multiprocessing useful
+It is useful for CPU-bound tasks that have to do a lot of CPU operations for a large amount of data and require a lot of computation time. With multiprocessing you can split 
+the data into equal parts an do parallel computing on different CPUs.
+
+Example: Calculate the square numbers for all numbers from 1 to 1000000. Divide the numbers into equal sized parts and use a process for each subset.
+
 Create and run processes
 You create a process with multiprocessing.Process(). It takes two important arguments:
 
@@ -16,6 +40,32 @@ args: the (function) arguments for the target function. This must be a tuple
 Start a process with process.start()
 
 Call process.join() to tell the program that it should wait for this process to complete before it continues with the rest of the code.'''
+
+'''
+# work with 2 processes.
+import multiprocessing
+import time
+
+start = time.perf_counter()
+
+def do_something():
+    print('Sleeping 1 second...')
+    time.sleep(1)
+    print('Done Sleeping')
+
+p1 = multiprocessing.Process(target=do_something)
+p2 = multiprocessing.Process(target=do_something)
+
+p1.start()
+p2.start()
+
+p1.join()
+p2.join()
+
+finish = time.perf_counter()
+print(f'Finished in {round(finish-start), 2} seconds')
+'''
+
 
 from multiprocessing import Process
 import os
@@ -44,9 +94,45 @@ if __name__ == "__main__":
     for process in processes:
         process.join()
 
+'''
+# new way of doing multiprocessing 
 
+import concurrent.futures
+import time
+
+start = time.perf_counter()
+
+
+def do_something(seconds):
+    print(f'Sleeping {seconds} second(s)...')
+    time.sleep(seconds)
+    # print("Done sleeping...{seconds}") without concurrent approach
+    return f'Done Sleeping...{seconds}'
+
+
+with concurrent.futures.ProcessPoolExecutor() as executor:
+    secs = [5, 4, 3, 2, 1]
+    results = executor.map(do_something, secs)
+
+    # for result in results:
+    #     print(result)
+    
+# processes = []
+
+# for _ in range(10):
+#     p = multiprocessing.Process(target=do_something, args=[1.5])
+#     p.start()
+#     processes.append(p)
+
+# for process in processes:
+#     process.join()
+
+finish = time.perf_counter()
+
+print(f'Finished in {round(finish-start, 2)} seconds')
 '''
 
+'''
 Share data between processes
 Since processes don't live in the same memory space, they do not have access to the same (public) data. Thus, they need special shared memory objects to share data.
 
@@ -54,7 +140,8 @@ Data can be stored in a shared memory variable using Value or Array.
 
 Value(type, value): Create a ctypes object of type type. Access the value with .target.
 Array(type, value): Create a ctypes array with elements of type type. Access the values with [].
-Task: Create two processes, each process should have access to a shared variable and modify it (in this case only increase it repeatedly by 1 for 100 times). Create another two processes that share an array and modify (increase) all the elements in the array.'''
+Task: Create two processes, each process should have access to a shared variable and modify it (in this case only increase it repeatedly by 1 for 100 times). Create another 
+two processes that share an array and modify (increase) all the elements in the array.'''
 
 from multiprocessing import Process, Value, Array
 import time
@@ -106,10 +193,15 @@ How to use Locks
 Notice that in the above example, the 2 processes should increment the shared value by 1 for 100 times. This results in 200 total operations. But why is the end value not 200?
 
 Race condition
-A race condition happened here. A race condition occurs when two or more processes or threads can access shared data and they try to change it at the same time. In our example the two processes have to read the shared value, increase it by 1, and write it back into the shared variable. If this happens at the same time, the two processes read the same value, increase it and write it back. Thus, both processes write the same increased value back into the shared object, and the value was not increased by 2. See https://www.python-engineer.com/learn/advancedpython16_threading/ for a detailed explanation of race conditions.
+A race condition happened here. A race condition occurs when two or more processes or threads can access shared data and they try to change it at the same time. In our example 
+the two processes have to read the shared value, increase it by 1, and write it back into the shared variable. If this happens at the same time, the two processes read the 
+same value, increase it and write it back. Thus, both processes write the same increased value back into the shared object, and the value was not increased by 2. 
+See https://www.python-engineer.com/learn/advancedpython16_threading/ for a detailed explanation of race conditions.
 
 Avoid race conditions with Locks
-A lock (also known as mutex) is a synchronization mechanism for enforcing limits on access to a resource in an environment where there are many processes/threads of execution. A Lock has two states: locked and unlocked. If the state is locked, it does not allow other concurrent processes/threads to enter this code section until the state is unlocked again.
+A lock (also known as mutex) is a synchronization mechanism for enforcing limits on access to a resource in an environment where there are many processes/threads of execution.
+A Lock has two states: locked and unlocked. If the state is locked, it does not allow other concurrent processes/threads to enter this code section until the state is unlocked 
+again.
 
 Two functions are important:
 
@@ -117,7 +209,10 @@ lock.acquire() : This will lock the state and block
 lock.release() : This will unlock the state again.
 Important: You should always release the block again after it was acquired!
 
-In our example the critical code section where the shared variable is read and increased is now locked. This prevents the second process from modyfing the shared object at the same time. Not much has changed in our code. All new changes are commented in the code below.'''
+In our example the critical code section where the shared variable is read and increased is now locked. This prevents the second process from modyfing the shared object at the
+same time. Not much has changed in our code. All new changes are commented in the code below.
+
+'''
 
 # import Lock
 from multiprocessing import Lock
@@ -180,7 +275,8 @@ if __name__ == "__main__":
 
 '''
 Use the lock as a context manager
-After lock.acquire() you should never forget to call lock.release() to unblock the code. You can also use a lock as a context manager, wich will safely lock and unlock your code. It is recommended to use a lock this way:'''
+After lock.acquire() you should never forget to call lock.release() to unblock the code. You can also use a lock as a context manager, wich will safely lock and unlock your 
+code. It is recommended to use a lock this way:'''
 
 def add_100(number, lock):
     for _ in range(100):
@@ -191,10 +287,12 @@ def add_100(number, lock):
 
 '''
 Using Queues in Python
-Data can also be shared between processes with a Queue. Queues can be used for thread-safe/process-safe data exchanges and data processing both in a multithreaded and a multiprocessing environment, which means you can avoid having to use any synchronization primitives like locks.
+Data can also be shared between processes with a Queue. Queues can be used for thread-safe/process-safe data exchanges and data processing both in a multithreaded and a 
+multiprocessing environment, which means you can avoid having to use any synchronization primitives like locks.
 
 The queue
-A queue is a linear data structure that follows the First In First Out (FIFO) principle. A good example is a queue of customers that are waiting in line, where the customer that came first is served first.'''
+A queue is a linear data structure that follows the First In First Out (FIFO) principle. A good example is a queue of customers that are waiting in line, where the customer 
+that came first is served first.'''
 
 from multiprocessing import Queue
 
@@ -263,13 +361,17 @@ if __name__ == "__main__":
 
 '''
 Process Pools
-A process pool object controls a pool of worker processes to which jobs can be submitted It supports asynchronous results with timeouts and callbacks and has a parallel map implementation. It can automatically manage the available processors and split data into smaller chunks which can then be processed in parallel by different processes. See https://docs.python.org/3.7/library/multiprocessing.html#multiprocessing.pool for all possible methods. Important methods are:
+A process pool object controls a pool of worker processes to which jobs can be submitted It supports asynchronous results with timeouts and callbacks and has a parallel map 
+implementation. It can automatically manage the available processors and split data into smaller chunks which can then be processed in parallel by different processes. See 
+https://docs.python.org/3.7/library/multiprocessing.html#multiprocessing.pool for all possible methods. Important methods are:
 
-map(func, iterable[, chunksize]) : This method chops the iterable into a number of chunks which it submits to the process pool as separate tasks. The (approximate) size of these chunks can be specified by setting chunksize to a positive integer. It blocks until the result is ready.
+map(func, iterable[, chunksize]) : This method chops the iterable into a number of chunks which it submits to the process pool as separate tasks. The (approximate) size of 
+these chunks can be specified by setting chunksize to a positive integer. It blocks until the result is ready.
 close() : Prevents any more tasks from being submitted to the pool. Once all the tasks have been completed the worker processes will exit.
 join(): Wait for the worker processes to exit. One must call close() or terminate() before using join().
 apply(func, args): Call func with arguments args. It blocks until the result is ready. func is only executed in ONE of the workers of the pool.
 Note: There are also asynchronous variants map_async() and apply_async() that will not block. They can execute callbacks when the results are ready.'''
+
 
 from multiprocessing import Pool 
 
