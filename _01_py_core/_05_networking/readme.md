@@ -52,4 +52,5 @@ Common socket commands in python:
 > s.close() - close the socket connection.
 
 Server: server file will be in a server.
+
 Client: client file will be in a user's pc.
