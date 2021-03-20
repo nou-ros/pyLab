@@ -51,6 +51,5 @@ Common socket commands in python:
 > s.recv() - receiving the message and decoding it. 
 > s.close() - close the socket connection.
 
-## server: server file will be in a server.
-## client: client file will be in a user's pc.
-
+Server: server file will be in a server.
+Client: client file will be in a user's pc.
