@@ -48,6 +48,8 @@ class Manager(Employee):
     def print_emp(self):
         for emp in self.employees:
             print("--> ", emp.fullname())
+        else:
+            print("No employee")
 
 
 dev_1 = Employee("John", "Doe", 50000)
