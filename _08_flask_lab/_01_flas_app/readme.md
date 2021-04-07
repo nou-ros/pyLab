@@ -1,4 +1,4 @@
-#DevSynop
+## DevSynop
 The synopsis of deshi devloper stories 
 
 DevSynop is a Bangladeshi Online publisher focusing on the stories of techies/developers around the Bangladesh. Join with the community to know more... 
