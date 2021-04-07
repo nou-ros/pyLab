@@ -33,3 +33,5 @@ We might need to install email validator for forms with - pip3 install email_val
 
 
 
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
