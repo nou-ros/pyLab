@@ -1,3 +1,0 @@
-1.create app.py
-2.make the app.run(debug=True)
-3.create layout.html same as base.html

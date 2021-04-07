@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="text-center container">
+    <div class="row py-lg-3">
+      <div class="col-md-9 mx-auto">
+        <h1 class="fw-light">DevSynop</h1>
+        <p class="lead text-muted">The synopsis of deshi devloper stories.</p>
+      </div>
+    </div>
+</section>
+{% for post in posts.items %}
+<article class="media content-section">
+  <img src=" {{ url_for('static', filename='profile_pics/' + post.author.image_file )}} " alt="" class="rounded-circle article-img">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a href="{{ url_for('users.user_posts', username=post.author.username) }}" class="mr-2">{{ post.author.username }}</a>
+            <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+        </div>
+        <h2><a href="{{ url_for('stories.detail_post', post_id=post.id) }}" class="article-title">{{post.title}}</a></h2>
+        <p class="article-content">{{post.content}}</p>
+    </div>
+</article>
+{% endfor %}
+
+{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+  {% if page_num %}
+    {% if posts.page == page_num %}
+      <a class="btn btn-info mb-3" href="{{ url_for('main.index', page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+    <a class="btn btn-outline-info mb-3" href="{{ url_for('main.index', page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+  {% else %}
+    ...
+  {% endif %}
+{% endfor %}
+{% endblock %}
+
+
