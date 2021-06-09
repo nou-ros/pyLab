@@ -1,8 +1,6 @@
 python decouple, admin-honeypot, django-session-timeout, 
 
-========
-Outline
-========
+# Outline
 
 WIP - Django E-Commerce Project 
 
