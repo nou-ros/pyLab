@@ -1,3 +1,5 @@
+# Opeartion includes: 
+
 - custom user model
 - user email registration
 - jwt(simple)
