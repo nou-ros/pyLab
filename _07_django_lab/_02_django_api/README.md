@@ -1,3 +1,0 @@
-# DjangoApi
-Cooking django api with rest framework and graphQL....
-

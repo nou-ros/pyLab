@@ -4,9 +4,7 @@ Python scripts construction area.
 ## Repository Desc:
 *  PyCORE 
 -- Fundamentals of python.
-* PyOOP
--- Object oriented programming approaches with python. 
-* TkinterLab
+* Tkinter
 -- Applications based on python tkinter(gui) library.
 *  PyGame 
 -- Applications based on python pyGame library.
