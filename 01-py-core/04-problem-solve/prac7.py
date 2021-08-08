@@ -1,5 +1,5 @@
-products = ['c', 'o', 'p']
-ord = ['p']
+products = ['c', 'o', 'p', 's']
+ord = ['s','p']
 
 raw_quantity = [None] * len(products)
 new_names = []
@@ -10,19 +10,18 @@ for p in products:
     else:
         new_names.append(0)
 
-prod_list = [2]
+prod_list = [7,4]
 print(new_names)
 
 new_prod_quant = []
 
-o = 0
 for new in new_names:
     if new == 0:
         new_prod_quant.append(0)
     else:
-        if new in ord[o]:
-            new_prod_quant.append(prod_list[o])
-            o+=1
+        for idx, val in enumerate(ord):
+            if new in val:
+                new_prod_quant.append(prod_list[idx])
 
 
 print(new_prod_quant)
