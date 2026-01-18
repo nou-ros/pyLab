@@ -1,1 +1,1 @@
-ML based (random forest and Logistic regression) IDS
+ML based (random forest and Logistic regression) ISD
